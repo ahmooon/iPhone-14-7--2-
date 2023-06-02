@@ -4,85 +4,87 @@
 //
 //  Created by Hojin Moon on 6/2/23.
 //
-
 import SwiftUI
-import CoreData
 
 struct ContentView: View {
-    @Environment(\.managedObjectContext) private var viewContext
-
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
-        animation: .default)
-    private var items: FetchedResults<Item>
-
     var body: some View {
-        NavigationView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp!, formatter: itemFormatter)")
-                    } label: {
-                        Text(item.timestamp!, formatter: itemFormatter)
-                    }
+        ZStack {
+            Color("AccentColor")
+                .ignoresSafeArea()
+            VStack {
+                Spacer()
+                HStack {
+                    Image("Group 1897")
                 }
-                .onDelete(perform: deleteItems)
+                Spacer().frame(height: 60)
             }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
+            HStack{
+                VStack{
+                    Image("sus")
+                    Spacer().frame(height: 675)
                 }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
+                Spacer().frame(width:268)
+            }
+            HStack{
+                VStack{
+                    Image("Text")
+                    Spacer().frame( width:245, height: 625)
+                }
+                Spacer().frame(width:245)
+            }
+            VStack{
+                HStack{
+                    Spacer().frame(width: 20)
+                    Image("Text2")
+                    Spacer().frame(width: 160)
+                    Image("Text3")
+                    Spacer().frame(width: 20)
+                }
+                Spacer().frame(height:525)
+            }
+            VStack{
+                Image("25 1.06.58 AM")
+                Spacer().frame(height: 38)
+                Image("min 1.06.58 AM")
+                Spacer().frame(height: 40)
+                Image("Ellipse 126")
+            }
+            VStack{
+                Spacer().frame(height: 65)
+            HStack{
+                Image("Vector 261")
+                Spacer().frame(width: 60)
+                Image("Vector 261")
                 }
             }
-            Text("Select an item")
-        }
-    }
-
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
-
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+            HStack{
+                Spacer().frame(width: 160)
+                VStack{
+                    Spacer().frame(height: 190)
+                    Image("12km 1")
+                }
             }
-        }
-    }
-
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            offsets.map { items[$0] }.forEach(viewContext.delete)
-
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+            VStack{
+                Spacer().frame(height: 770)
+                HStack{
+                    Image("Text5")
+                    Spacer().frame(width: 50)
+                    Image("Group 1895")
+                    Spacer().frame(width: 50)
+                    Image("text 1")
+                }
+            }
+            VStack{
+                Image("Vector 259")
+                Spacer().frame(height:575)
             }
         }
     }
 }
-
-private let itemFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .short
-    formatter.timeStyle = .medium
-    return formatter
-}()
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        ContentView()
     }
 }
+
